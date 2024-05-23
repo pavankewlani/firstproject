@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-720!#j$5ghm(87k_c*v=(&d%wer$@yboh1vwb4$-+waou3t)*9'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,29 +81,14 @@ WSGI_APPLICATION = 'new.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'new',
-        'USER' : 'root',
-        'PASSWORD' : 'pavan',
-        "HOST" : "localhost",
-        "PORT":3306,
+        'ENGINE': os.getenv("DB_ENG"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER' : os.getenv("DB_USER"),
+        'PASSWORD' : os.getenv("DB_PASS"),
+        "HOST" : os.getenv("DB_HOST"),
+        "PORT":os.getenv("DB_PORT"),
     }
 }
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'sql12707898',
-#         'USER' : 'sql12707898',
-#         'PASSWORD' : 'ZVEFvAZAvs',
-#         "HOST" : "sql12.freemysqlhosting.net",
-#         "PORT":3306,
-#         'OPTIONS': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
-#     }
-# }
-#Database Host	Database Name	Database Username	Database Password	Database Size	Status	Delete
-#sql12.freemysqlhosting.net	sql12707898	sql12707898	Please wait	0.00MB
 
 
 # Password validation
